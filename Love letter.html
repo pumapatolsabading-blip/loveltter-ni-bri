@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Love Letter</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+
+    font-family:'Poppins',sans-serif;
+
+    background:linear-gradient(135deg,#fff7f8,#ffeef3);
+
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:100vh;
+
+}
+
+
+
+/* Background Glow */
+
+body::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    background:#ffd6e4;
+
+    border-radius:50%;
+
+    filter:blur(150px);
+
+    top:-150px;
+    left:-100px;
+
+}
+
+
+body::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    background:#fff1c9;
+
+    border-radius:50%;
+
+    filter:blur(150px);
+
+    bottom:-150px;
+    right:-100px;
+
+}
+
+
+
+/* Floating Hearts */
+
+.heart{
+
+    position:absolute;
+
+    bottom:-50px;
+
+    color:#f29ab4;
+
+    font-size:20px;
+
+    animation:rise 8s linear infinite;
+
+    opacity:.6;
+
+    z-index:1;
+
+}
+
+
+@keyframes rise{
+
+    0%{
+
+        transform:translateY(0) rotate(0deg);
+
+        opacity:0;
+
+    }
+
+
+    20%{
+
+        opacity:.8;
+
+    }
+
+
+    100%{
+
+        transform:translateY(-120vh) rotate(360deg);
+
+        opacity:0;
+
+    }
+
+}
+
+
+
+/* Envelope */
+
+
+.envelope{
+
+    position:relative;
+
+    width:320px;
+
+    height:220px;
+
+    cursor:pointer;
+
+    animation:float 3s ease-in-out infinite;
+
+    z-index:5;
+
+}
+
+
+@keyframes float{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+}
+
+
+
+.back{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    background:#f7b8c9;
+
+    border-radius:8px;
+
+}
+
+
+
+.front{
+
+    position:absolute;
+
+    width:100%;
+
+    height:100%;
+
+    clip-path:polygon(0 0,50% 55%,100% 0,100% 100%,0 100%);
+
+    background:#f3a7bc;
+
+    transform-origin:top;
+
+    transition:.8s;
+
+    z-index:5;
+
+}
+
+
+
+/* Small Letter */
+
+
+.paper{
+
+    position:absolute;
+
+    left:10%;
+
+    width:80%;
+
+    height:180px;
+
+    background:white;
+
+    border-radius:8px;
+
+    padding:20px;
+
+    top:20px;
+
+    transition:1s;
+
+    z-index:2;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+
+.paper h2{
+
+    font-family:'Dancing Script',cursive;
+
+    color:#e66a8d;
+
+}
+
+
+
+.paper p{
+
+    color:#666;
+
+    font-size:.9rem;
+
+    line-height:1.6;
+
+}
+
+
+
+.open .front{
+
+    transform:rotateX(180deg);
+
+}
+
+
+
+.open .paper{
+
+    transform:translateY(-220px);
+
+}
+
+
+
+
+/* Full Letter */
+
+
+#letter{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:1s;
+
+    z-index:10;
+
+}
+
+
+
+#letter.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+
+.card{
+
+    width:90%;
+
+    max-width:720px;
+
+    background:rgba(255,255,255,.95);
+
+    padding:50px;
+
+    border-radius:25px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+
+    animation:fade .8s;
+
+}
+
+
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+.card h1{
+
+    font-family:'Dancing Script',cursive;
+
+    color:#e66a8d;
+
+    font-size:3rem;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.card p{
+
+    line-height:2;
+
+    color:#555;
+
+}
+
+
+
+.sign{
+
+    margin-top:35px;
+
+    text-align:right;
+
+    color:#e66a8d;
+
+    font-weight:600;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="envelope" id="envelope">
+
+
+<div class="back"></div>
+
+
+<div class="paper">
+
+<h2>For You</h2>
+
+<p>
+Tap the envelope.<br>
+Someone wrote this with love.
+</p>
+
+</div>
+
+
+<div class="front"></div>
+
+
+</div>
+
+
+
+
+<div id="letter">
+
+<div class="card">
+
+
+<h1>My Dearest Love,</h1>
+
+
+<p>
+
+Some feelings are difficult to explain, but if there's one thing I know, it's that meeting you has been one of the best things that has ever happened to me.
+
+<br><br>
+
+You make ordinary days feel extraordinary. Your smile brings peace to my heart, and your presence makes everything feel lighter.
+
+<br><br>
+
+Thank you for every laugh, every conversation, and every little moment we've shared together.
+
+<br><br>
+
+No matter where life takes us, I hope we continue creating beautiful memories together.
+
+<br><br>
+
+I love you—today, tomorrow, and always.
+
+</p>
+
+
+<div class="sign">
+
+With all my love ❤️
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+const envelope=document.getElementById("envelope");
+
+
+envelope.onclick=()=>{
+
+
+    envelope.classList.add("open");
+
+
+    setTimeout(()=>{
+
+
+        envelope.style.display="none";
+
+
+        document.getElementById("letter").classList.add("show");
+
+
+    },1600);
+
+
+};
+
+
+
+
+
+// Create Floating Hearts
+
+
+function createHeart(){
+
+
+    const heart=document.createElement("div");
+
+
+    heart.className="heart";
+
+
+    heart.innerHTML="♥";
+
+
+    heart.style.left=Math.random()*100+"vw";
+
+
+    heart.style.fontSize=
+    Math.random()*20+15+"px";
+
+
+    heart.style.animationDuration=
+    Math.random()*5+5+"s";
+
+
+    document.body.appendChild(heart);
+
+
+
+    setTimeout(()=>{
+
+
+        heart.remove();
+
+
+    },10000);
+
+
+}
+
+
+
+setInterval(createHeart,600);
+
+
+
+</script>
+
+
+</body>
+</html>
